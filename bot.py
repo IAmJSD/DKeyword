@@ -8,7 +8,7 @@ bot = discord.Client()
 config = json.load(
     open("./config.json", "r")
 )
-config["banned_words"] = [w.lower() for w in config.banned_words]
+config["banned_words"] = [w.lower() for w in config["banned_words"]]
 
 info = "[Info] "
 error = "[Error] "
@@ -27,8 +27,8 @@ async def on_message(message):
     words = message.content.lower().split(" ")
     for word in words:
         if not message.channel.is_private:
-            if word in config.banned_words:
-                if not config.enable_banned_words:
+            if word in config["banned_words"]:
+                if not config["enable_banned_words"]:
                     return
                 if len(word) == 1:
                     return
@@ -62,12 +62,12 @@ async def on_message(message):
                         )
                         return
 
-            elif word in config.responses:
-                if not config.enable_responses:
+            elif word in config["responses"]:
+                if not config["enable_responses"]:
                     return
                 try:
                     await bot.send_message(
-                        message.channel, config.responses[word]
+                        message.channel, config["responses"][word]
                     )
                     print(
                         success + "{} has triggered the "
@@ -83,4 +83,4 @@ async def on_message(message):
                     )
                     return
 
-bot.run(config.token)
+bot.run(config["token"])
