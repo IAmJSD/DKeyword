@@ -1,0 +1,10 @@
+{
+  "enable_banned_words": true,
+  "enable_responses": true,
+  "banned_words": ["naughty", "word", "xd", "nigeria"],
+  "responses": {
+    "hi": "Hello!",
+    "jeff": "Jeff is bad!!"
+  },
+  "token": "TOKEN_HERE"
+}
