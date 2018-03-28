@@ -9,11 +9,8 @@ token = "TOKEN_HERE" # Your bot token here.
 
 #---BOT---
 import discord
-from discord.ext import commands
-from discord.ext.commands import Bot
 
-bot = commands.Bot(command_prefix="DKeyword")
-bot.remove_command("help")
+bot = discord.Client()
 
 info = "[Info] "
 error = "[Error] "
@@ -23,7 +20,8 @@ success = "[Success] "
 async def on_ready():
     print (info + "Ready!") 
 
-async def detection(message):
+@bot.event
+async def on_message(message):
     if bot.user.id == message.author.id:
         return
     words = message.content.lower().split(" ")
@@ -65,7 +63,5 @@ async def detection(message):
                     return
             else:
                 pass
-
-bot.add_listener(detection, 'on_message')
 
 bot.run(token)
